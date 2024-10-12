@@ -1,9 +1,11 @@
-const MyComponent = () => {
+import Geolocation from '../components/Geolocation';
+
+const App = () => {
   return (
-    <div>
-      <h1>Main page</h1>
-    </div>
+    <>
+      <Geolocation />
+    </>
   );
 };
 
-export default MyComponent;
+export default App;
