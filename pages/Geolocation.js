@@ -1,45 +1,68 @@
 import { useEffect, useState } from 'react';
 import { getWeatherData } from './api/api';
 
-const Geolocation = (weatherData) => {
+const Geolocation = () => {
+  const defaultCoords = { latitude: 53.55, longitude: 2.4333 };
   const [data, setData] = useState('');
-  const [coords, setCoords] = useState({ latitude: null, longitude: null });
+  const [coords, setCoords] = useState({ latitude: defaultCoords.latitude, longitude: defaultCoords.longitude });
   const [error, setError] = useState('');
+  const [isGpsOn, setGps] = useState(false);
 
   const getData = async () => {
-    const defaultCoords = {
-      latitude: 53.8902528,
-      longitude: 27.5677184,
-    };
-
-    const weatherData = await getWeatherData(defaultCoords.latitude, defaultCoords.longitude);
+    const weatherData = await getWeatherData(coords.latitude, coords.longitude);
     setData(weatherData);
   };
 
-  useEffect(() => {
+  const getLocation = () => {
     if (navigator !== undefined && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setCoords({ latitude: position.coords.latitude, longitude: position.coords.longitude });
+          setGps(true);
+          console.log('gps on');
+          // вызываем useEffect с getData() когда поменялись координаты и геолокация включена
         },
         (err) => {
-          setError(err.message);
+          if (err.code === err.PERMISSION_DENIED) {
+            setGps(false);
+            setCoords({ latitude: defaultCoords.latitude, longitude: defaultCoords.longitude });
+            console.log('gps off');
+            getData();
+          } else {
+            setError(err.message);
+          }
         },
         { enableHighAccuracy: false, timeout: 10000, maximumAge: 0 }
       );
     }
+  };
+
+  useEffect(() => {
+    getLocation();
+
+    return () => {
+      setData('');
+      setError('');
+      setGps(false);
+    };
   }, []);
+
+  useEffect(() => {
+    if (isGpsOn) {
+      getData();
+    }
+  }, [coords, isGpsOn]);
 
   return (
     <>
-      <button onClick={getData}>get data</button>
       {error ? (
-        <p>Ошибка: {error}</p>
+        <p>Ошибка: err.message</p>
       ) : data === '' ? (
         <p>Загрузка данных...</p>
       ) : (
         <div>
           <h1>{data.name}</h1>
+          <p>Геолокация {isGpsOn ? 'включена' : 'отключена'}</p>
           <p>Тип погоды: {data.weather[0].main}</p>
           <p>Температура: {data.main.temp}</p>
           <p>Ощущаемая температура: {data.main.feels_like}</p>
