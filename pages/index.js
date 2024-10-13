@@ -1,4 +1,4 @@
-import Geolocation from '../components/Geolocation';
+import Geolocation from './Geolocation';
 
 const App = () => {
   return (
