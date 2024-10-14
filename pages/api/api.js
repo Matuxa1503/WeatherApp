@@ -1,13 +1,19 @@
 import axios from 'axios';
 
-export const getWeatherData = async (lat, lon) => {
+export const getWeatherData = async (city, lat, lon) => {
   try {
-    const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=7b9ed585c43dbd690489f02503451b75&units=metric`
-    );
-    return response.data;
+    let response;
+    if (city) {
+      response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=7b9ed585c43dbd690489f02503451b75&units=metric&lang=ru`
+      );
+    } else if (lat && lon) {
+      response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=7b9ed585c43dbd690489f02503451b75&units=metric&lang=ru`
+      );
+    }
+    return { data: response.data, err: null };
   } catch (err) {
-    console.log(err);
-    return null;
+    return { data: null, err: err.message };
   }
 };
