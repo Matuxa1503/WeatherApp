@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   font-family: 'Arial';
   font-size: 16px;
@@ -41,4 +45,9 @@ a:visited {
 }
 p {
   width: auto;
+  --hookers-green: #5a7d7cff;
+  --lavender-web: #dadff7ff;
+  --gunmetal: #232c33ff;
+  --powder-blue: #a0c1d1ff;
+  --french-gray: #b5b2c2ff;
 }
