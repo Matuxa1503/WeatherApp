@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { getWeatherData } from './api/api';
 import Link from 'next/link';
 import ShowWeatherData from '../components/ShowWeatherData';
+import { getLocation } from '../utils/getLocation';
 
-const Geolocation = () => {
+const RootPage = () => {
   const defaultCoords = { latitude: 53.55, longitude: 2.4333 };
-  const [data, setData] = useState({
+  const [dataWeather, setWeather] = useState({
     coord: {
       lon: 2.4333,
       lat: 53.55,
@@ -53,7 +54,7 @@ const Geolocation = () => {
   });
   const [city, setCity] = useState('');
   const [coords, setCoords] = useState({ latitude: defaultCoords.latitude, longitude: defaultCoords.longitude });
-  const [error, setErrorLocation] = useState('');
+  const [hasError, setHasError] = useState('');
   const [reqError, setReqError] = useState('');
   const [isGpsOn, setGps] = useState(false);
 
@@ -65,32 +66,7 @@ const Geolocation = () => {
       setReqError(err);
     } else {
       setReqError('');
-      console.log(weatherData);
-      setData(weatherData);
-    }
-  };
-
-  const getLocation = () => {
-    if (navigator !== undefined && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setCoords({ latitude: position.coords.latitude, longitude: position.coords.longitude });
-          setReqError('');
-          setGps(true);
-          // вызываем useEffect с getData() когда поменялись координаты и геолокация включена
-        },
-        (err) => {
-          if (err.code === err.PERMISSION_DENIED) {
-            setGps(false);
-            setCoords({ latitude: defaultCoords.latitude, longitude: defaultCoords.longitude });
-            setReqError('');
-            // getData();
-          } else {
-            setErrorLocation(err.message);
-          }
-        },
-        { enableHighAccuracy: false, timeout: 10000, maximumAge: 0 }
-      );
+      setWeather(weatherData);
     }
   };
 
@@ -100,11 +76,11 @@ const Geolocation = () => {
   };
 
   useEffect(() => {
-    // getLocation();
+    getLocation(defaultCoords, setCoords, setReqError, setGps, setHasError, getData);
 
     return () => {
-      // setData('');
-      setErrorLocation('');
+      // setWeather('');
+      setHasError('');
       setGps(false);
       setReqError('');
     };
@@ -118,21 +94,21 @@ const Geolocation = () => {
 
   return (
     <>
-      {error ? (
-        <p>Ошибка: err.message</p>
-      ) : data === '' ? (
-        <p>Загрузка данных...</p>
-      ) : (
+      {hasError && <p>Ошибка загрузки</p>}
+      {!hasError && dataWeather === null && <p>Загрузка данных...</p>}
+      {!hasError && dataWeather && (
         <div>
-          <p>Геолокация {isGpsOn ? 'включена' : 'отключена'}</p>
-          <ShowWeatherData data={data} namePage={pageName} />
+          <div>
+            <p>Геолокация {isGpsOn ? 'включена' : 'отключена'}</p>
+            <ShowWeatherData data={dataWeather} pageName={pageName} />
+          </div>
           <div>
             <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
             <button onClick={getWeatherCity}>Поиск погоды по введенному городу</button>
-            {reqError && <p>Неккоректный запрос города</p>}
+            {reqError && <p>Неккоректный запрос ввода</p>}
           </div>
           <div>
-            <Link href={`/weather/${data.name}?latitude=${coords.latitude}&longitude=${coords.longitude}`}>
+            <Link href={`/weather/${dataWeather.name}?latitude=${coords.latitude}&longitude=${coords.longitude}`}>
               <button>Подробнее о погоде по часам</button>
             </Link>
           </div>
@@ -142,4 +118,4 @@ const Geolocation = () => {
   );
 };
 
-export default Geolocation;
+export default RootPage;

@@ -1,9 +1,9 @@
-import Geolocation from './Geolocation';
+import RootPage from './RootPage';
 
 const App = () => {
   return (
     <>
-      <Geolocation />
+      <RootPage />
     </>
   );
 };

@@ -62,7 +62,7 @@ const WeatherDetails = () => {
     <>
       {hasError && <p>Ошибка загрузки</p>}
       {!hasError && !dataWeather && <p>Загрузка данных...</p>}
-      {!hasError && dataWeather && (
+      {!hasError && dataWeather === null && (
         <div>
           <CityWeatherInfo cityInfo={dataWeather.infoCity} />
           <div>
@@ -73,7 +73,7 @@ const WeatherDetails = () => {
                 <p>Данные на сегодня:</p>
                 {dataWeather.today.map((item, index) => (
                   <div key={index}>
-                    <ShowWeatherData data={item} namePage={pageName} />
+                    <ShowWeatherData data={item} pageName={pageName} />
                   </div>
                 ))}
               </div>
@@ -81,7 +81,7 @@ const WeatherDetails = () => {
           </div>
           <div>
             <p>Данные на завтрашний день:</p>
-            <ShowWeatherData data={dataWeather.tomorrow} namePage={pageName} />
+            <ShowWeatherData data={dataWeather.tomorrow} pageName={pageName} />
           </div>
         </div>
       )}
