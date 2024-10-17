@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { getWeatherData } from '../api/api';
 import ShowWeatherData from '../../components/ShowWeatherData';
 import CityWeatherInfo from '../../components/CityWeatherInfo';
+import Link from 'next/link';
 
 const WeatherDetails = () => {
   const [dataWeather, setWeather] = useState('');
@@ -61,8 +62,8 @@ const WeatherDetails = () => {
   return (
     <>
       {hasError && <p>Ошибка загрузки</p>}
-      {!hasError && !dataWeather && <p>Загрузка данных...</p>}
-      {!hasError && dataWeather === null && (
+      {!hasError && dataWeather === null && <p>Загрузка данных...</p>}
+      {!hasError && dataWeather && (
         <div>
           <CityWeatherInfo cityInfo={dataWeather.infoCity} />
           <div>
@@ -83,6 +84,9 @@ const WeatherDetails = () => {
             <p>Данные на завтрашний день:</p>
             <ShowWeatherData data={dataWeather.tomorrow} pageName={pageName} />
           </div>
+          <Link href={'/'}>
+            <button>Вернуться назад</button>
+          </Link>
         </div>
       )}
     </>
