@@ -1,11 +1,7 @@
 import RootPage from './RootPage';
 
 const App = () => {
-  return (
-    <>
-      <RootPage />
-    </>
-  );
+  return <RootPage />;
 };
 
 export default App;
