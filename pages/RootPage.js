@@ -3,6 +3,7 @@ import { getWeatherData } from './api/api';
 import Link from 'next/link';
 import ShowWeatherData from '../components/ShowWeatherData/ShowWeatherData';
 import s from '../styles/RootPage.module.scss';
+import { getCurrentPageName } from '../utils/getCurrentPageName';
 
 const RootPage = () => {
   const defaultCoords = { latitude: 53.55, longitude: 2.4333 };
@@ -58,12 +59,11 @@ const RootPage = () => {
   const [hasError, setHasError] = useState('');
   const [reqError, setReqError] = useState('');
   const [isGpsOn, setGps] = useState(false);
-
-  const pageName = 'rootPage';
+  const page = getCurrentPageName();
 
   const getData = async () => {
     console.log('сработал getData');
-    const { data, err } = await getWeatherData(city, coords.latitude, coords.longitude, pageName);
+    const { data, err } = await getWeatherData(city, coords.latitude, coords.longitude, page);
     if (err) {
       setReqError(err);
     } else {
@@ -114,7 +114,7 @@ const RootPage = () => {
             </svg>
           </div>
           <div className={s.weatherInfo}>
-            <ShowWeatherData data={dataWeather} pageName={pageName} />
+            <ShowWeatherData data={dataWeather} />
             <Link href={`/weather/${dataWeather.name}?latitude=${coords.latitude}&longitude=${coords.longitude}`}>
               <button className={`${s.btn} m-5 bg-b`}>Подробнее о погоде по часам</button>
             </Link>

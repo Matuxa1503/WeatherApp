@@ -1,0 +1,11 @@
+.wrapper {
+  @apply container 2xl:px-3 mx-auto w-full;
+
+  .paragData {
+    @apply text-4xl text-a;
+  }
+
+  .content {
+    @apply mt-14;
+  }
+}

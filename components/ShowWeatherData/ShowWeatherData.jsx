@@ -1,14 +1,18 @@
+import { useRouter } from 'next/router';
 import s from '../../styles/ShowWeatherData.module.scss';
 import WeatherInfo from './WeatherInfo';
+import { getCurrentPageName } from '../../utils/getCurrentPageName';
 
-const ShowWeatherData = ({ data, pageName }) => {
+const ShowWeatherData = ({ data }) => {
   const convert = (item) => {
     return Math.round(item);
   };
 
+  const page = getCurrentPageName();
+
   return (
     <div>
-      <h1 className={s.title}>{pageName === 'rootPage' ? data.name : data.dt_txt}</h1>
+      <h1 className={s.title}>{page === 'rootPage' ? data.name : data.dt_txt}</h1>
       <h2 className={s.subtitle}>{data.weather[0].description}</h2>
       <div className={s.temp}>
         <WeatherInfo
@@ -58,7 +62,7 @@ const ShowWeatherData = ({ data, pageName }) => {
           }
           paragText={<p>Атмосферное давление: {convert(data.main.pressure * 0.750061683)} мм рт.ст</p>}
         />
-        {pageName === 'moreInfoPage' && (
+        {page === 'moreInfoPage' && (
           <>
             <p>Видимость: {convert(data.visibility)} м</p>
             <p>Вероятность осадков: {data.pop * 100} %</p>

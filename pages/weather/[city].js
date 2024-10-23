@@ -4,12 +4,14 @@ import { getWeatherData } from '../api/api';
 import ShowWeatherData from '../../components/ShowWeatherData/ShowWeatherData';
 import CityWeatherInfo from '../../components/CityWeatherInfo';
 import Link from 'next/link';
+import s from '../../styles/SlugCity.module.scss';
+import { getCurrentPageName } from '../../utils/getCurrentPageName';
 
 const WeatherDetails = () => {
   const [dataWeather, setWeather] = useState('');
   const [hasError, setHasError] = useState('');
   const router = useRouter();
-  const pageName = 'moreInfoPage';
+  const page = getCurrentPageName();
 
   const { city, latitude, longitude } = router.query;
 
@@ -32,7 +34,7 @@ const WeatherDetails = () => {
   };
 
   const getData = async () => {
-    const { data, infoCity, err } = await getWeatherData(city, latitude, longitude, pageName);
+    const { data, infoCity, err } = await getWeatherData(city, latitude, longitude, page);
     if (err) {
       setHasError(err);
     } else {
@@ -64,25 +66,27 @@ const WeatherDetails = () => {
       {hasError && <p>Ошибка загрузки</p>}
       {!hasError && dataWeather === null && <p>Загрузка данных...</p>}
       {!hasError && dataWeather && (
-        <div>
+        <div className={s.wrapper}>
           <CityWeatherInfo cityInfo={dataWeather.infoCity} />
-          <div>
-            {dataWeather.today.length === 0 ? (
-              <p>Новые данные о погоде появятся завтра в 0:00</p>
-            ) : (
-              <div>
-                <p>Данные на сегодня:</p>
-                {dataWeather.today.map((item, index) => (
-                  <div key={index}>
-                    <ShowWeatherData data={item} pageName={pageName} />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-          <div>
-            <p>Данные на завтрашний день:</p>
-            <ShowWeatherData data={dataWeather.tomorrow} pageName={pageName} />
+          <div className={s.content}>
+            <div>
+              {dataWeather.today.length === 0 ? (
+                <p className={s.paragData}>Новые данные о погоде появятся завтра в 0:00</p>
+              ) : (
+                <>
+                  <p className={s.paragData}>Данные на сегодня:</p>
+                  {dataWeather.today.map((item, index) => (
+                    <div key={index}>
+                      <ShowWeatherData data={item} />
+                    </div>
+                  ))}
+                </>
+              )}
+            </div>
+            <div>
+              <p className={s.paragData}>Данные на завтрашний день:</p>
+              <ShowWeatherData data={dataWeather.tomorrow} />
+            </div>
           </div>
           <Link href={'/'}>
             <button>Вернуться назад</button>
