@@ -1,4 +1,4 @@
-import s from '../../styles/ShowWeatherData.module.scss';
+import s from '../../styles/ShowWeatherDataInfo.module.scss';
 import WeatherInfo from './WeatherInfo';
 
 const ShowWeatherDataInfo = ({ data }) => {

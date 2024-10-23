@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { getWeatherData } from '../api/api';
-// import ShowWeatherData from '../../components/ShowWeatherData/ShowWeatherData';
 import CityWeatherInfo from '../../components/CityWeatherInfo';
 import Link from 'next/link';
 import s from '../../styles/SlugCity.module.scss';
