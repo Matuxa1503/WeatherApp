@@ -6,6 +6,7 @@ import CityWeatherInfo from '../../components/CityWeatherInfo';
 import Link from 'next/link';
 import s from '../../styles/SlugCity.module.scss';
 import { getCurrentPageName } from '../../utils/getCurrentPageName';
+import { formatWeatherDates } from '../../utils/formatWeatherDates';
 
 const WeatherDetails = () => {
   const [dataWeather, setWeather] = useState('');
@@ -15,24 +16,6 @@ const WeatherDetails = () => {
 
   const { city, latitude, longitude } = router.query;
 
-  const formattedTimes = () => {
-    const today = new Date();
-
-    // Достаем дату формата 'YYYY-MM-DD' из строки
-    const getDate = (date) => date.toISOString().split('T')[0];
-
-    // Увеличиваем дату на один день и забираем погоду в 12 часов дня
-    const getTomorrowDate = () => {
-      const tomorrow = new Date(today);
-      tomorrow.setDate(today.getDate() + 1);
-      return getDate(tomorrow) + ' 12:00:00';
-    };
-    // Текущее время в формате Unix +3 часа
-    const currentUnixTime = Math.floor(Date.now() / 1000) + 10800;
-
-    return { currentUnixTime, formattedDate: getDate(today), tomorrowDate: getTomorrowDate() };
-  };
-
   const getData = async () => {
     const { data, infoCity, err } = await getWeatherData(city, latitude, longitude, page);
     if (err) {
@@ -40,7 +23,7 @@ const WeatherDetails = () => {
     } else {
       setHasError('');
 
-      const times = formattedTimes();
+      const times = formatWeatherDates();
       const tomorrowWeather = data.find((obj) => obj.dt_txt.includes(times.tomorrowDate));
       const arrTodayWeather = data.filter((obj) => {
         if (obj.dt >= times.currentUnixTime && obj.dt_txt.includes(times.formattedDate)) {
