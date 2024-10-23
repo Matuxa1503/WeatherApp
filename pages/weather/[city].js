@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { getWeatherData } from '../api/api';
-import ShowWeatherData from '../../components/ShowWeatherData/ShowWeatherData';
+// import ShowWeatherData from '../../components/ShowWeatherData/ShowWeatherData';
 import CityWeatherInfo from '../../components/CityWeatherInfo';
 import Link from 'next/link';
 import s from '../../styles/SlugCity.module.scss';
 import { getCurrentPageName } from '../../utils/getCurrentPageName';
 import { formatWeatherDates } from '../../utils/formatWeatherDates';
+import ShowWeatherDataInfo from '../../components/ShowWeatherData/ShowWeatherDataInfo';
 
 const WeatherDetails = () => {
   const [dataWeather, setWeather] = useState('');
@@ -60,7 +61,7 @@ const WeatherDetails = () => {
                   <p className={s.paragData}>Данные на сегодня:</p>
                   {dataWeather.today.map((item, index) => (
                     <div key={index}>
-                      <ShowWeatherData data={item} />
+                      <ShowWeatherDataInfo data={item} />
                     </div>
                   ))}
                 </>
@@ -68,7 +69,7 @@ const WeatherDetails = () => {
             </div>
             <div>
               <p className={s.paragData}>Данные на завтрашний день:</p>
-              <ShowWeatherData data={dataWeather.tomorrow} />
+              <ShowWeatherDataInfo data={dataWeather.tomorrow} />
             </div>
           </div>
           <Link href={'/'}>

@@ -1,18 +1,14 @@
-import { useRouter } from 'next/router';
 import s from '../../styles/ShowWeatherData.module.scss';
 import WeatherInfo from './WeatherInfo';
-import { getCurrentPageName } from '../../utils/getCurrentPageName';
 
-const ShowWeatherData = ({ data }) => {
+const ShowWeatherDataInfo = ({ data }) => {
   const convert = (item) => {
     return Math.round(item);
   };
 
-  const page = getCurrentPageName();
-
   return (
     <div>
-      <h1 className={s.title}>{page === 'rootPage' ? data.name : data.dt_txt}</h1>
+      <h1 className={s.title}>{data.dt_txt}</h1>
       <h2 className={s.subtitle}>{data.weather[0].description}</h2>
       <div className={s.temp}>
         <WeatherInfo
@@ -62,16 +58,12 @@ const ShowWeatherData = ({ data }) => {
           }
           paragText={<p>Атмосферное давление: {convert(data.main.pressure * 0.750061683)} мм рт.ст</p>}
         />
-        {page === 'moreInfoPage' && (
-          <>
-            <p>Видимость: {convert(data.visibility)} м</p>
-            <p>Вероятность осадков: {data.pop * 100} %</p>
-            <p>Процент облачности: {convert(data.clouds.all)} %</p>
-          </>
-        )}
+        <p>Видимость: {convert(data.visibility)} м</p>
+        <p>Вероятность осадков: {data.pop * 100} %</p>
+        <p>Процент облачности: {convert(data.clouds.all)} %</p>
       </div>
     </div>
   );
 };
 
-export default ShowWeatherData;
+export default ShowWeatherDataInfo;

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getWeatherData } from './api/api';
 import Link from 'next/link';
-import ShowWeatherData from '../components/ShowWeatherData/ShowWeatherData';
 import s from '../styles/RootPage.module.scss';
 import { getCurrentPageName } from '../utils/getCurrentPageName';
+import ShowWeatherDataRoot from '../components/ShowWeatherData/ShowWeatherDataRoot';
 
 const RootPage = () => {
   const defaultCoords = { latitude: 53.55, longitude: 2.4333 };
@@ -114,7 +114,7 @@ const RootPage = () => {
             </svg>
           </div>
           <div className={s.weatherInfo}>
-            <ShowWeatherData data={dataWeather} />
+            <ShowWeatherDataRoot data={dataWeather} />
             <Link href={`/weather/${dataWeather.name}?latitude=${coords.latitude}&longitude=${coords.longitude}`}>
               <button className={`${s.btn} m-5 bg-b`}>Подробнее о погоде по часам</button>
             </Link>
