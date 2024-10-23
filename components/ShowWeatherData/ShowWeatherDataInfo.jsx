@@ -1,5 +1,5 @@
 import s from '../../styles/ShowWeatherDataInfo.module.scss';
-import WeatherInfo from './WeatherInfo';
+import WeatherInfo from '../WeatherInfo';
 
 const ShowWeatherDataInfo = ({ data }) => {
   const convert = (item) => {

@@ -1,4 +1,4 @@
-import WeatherInfo from './WeatherInfo';
+import WeatherInfo from '../WeatherInfo';
 import s from '../../styles/ShowWeatherDataRoot.module.scss';
 
 const ShowWeatherDataRoot = ({ data }) => {
