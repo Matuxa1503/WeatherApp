@@ -81,7 +81,7 @@ const RootPage = () => {
                 onChange={(e) => setCity(e.target.value)}
               />
               {reqError && <p className={s.error}>Неккоректный запрос ввода</p>}
-              <button className={`${s.btn} block mt-5 bg-a`} onClick={getWeatherCity}>
+              <button className={`${s.btn} block mt-5 bg-a ${!city.trim() ? 'opacity-10' : ''}`} disabled={!city.trim()} onClick={getWeatherCity}>
                 Поиск погоды по введенному городу
               </button>
             </div>
