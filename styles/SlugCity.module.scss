@@ -2,10 +2,22 @@
   @apply container 2xl:px-3 mx-auto w-full;
 
   .paragData {
-    @apply text-4xl text-a;
+    @apply text-4xl mt-10 text-a;
   }
 
   .content {
-    @apply mt-14;
+    @apply flex flex-wrap justify-center gap-x-4 gap-y-10 my-14;
+
+    .item {
+      @apply bg-zinc-800 p-3  rounded-lg;
+    }
   }
+}
+
+.svg {
+  @apply h-5 w-5 text-d;
+}
+
+.btn {
+  @apply p-2 border rounded-md text-mainColor hover:bg-c transition-colors ease-in-out duration-300;
 }

@@ -51,29 +51,33 @@ const WeatherDetails = () => {
       {!hasError && dataWeather && (
         <div className={s.wrapper}>
           <CityWeatherInfo cityInfo={dataWeather.infoCity} />
+          <Link className="flex justify-center" href={'/'}>
+            <button className={`${s.btn} bg-a`}>Вернуться на Главную</button>
+          </Link>
+          {Boolean(dataWeather.today.length) ? (
+            <p className={s.paragData}>Данные на сегодня:</p>
+          ) : (
+            <p className={s.paragData}>Новые данные о погоде появятся в 0:00</p>
+          )}
           <div className={s.content}>
-            <div>
-              {dataWeather.today.length === 0 ? (
-                <p className={s.paragData}>Новые данные о погоде появятся завтра в 0:00</p>
-              ) : (
-                <>
-                  <p className={s.paragData}>Данные на сегодня:</p>
-                  {dataWeather.today.map((item, index) => (
-                    <div key={index}>
-                      <ShowWeatherDataInfo data={item} />
-                    </div>
-                  ))}
-                </>
-              )}
-            </div>
-            <div>
-              <p className={s.paragData}>Данные на завтрашний день:</p>
-              <ShowWeatherDataInfo data={dataWeather.tomorrow} />
+            {Boolean(dataWeather.today.length) && (
+              <>
+                {dataWeather.today.map((item, index) => (
+                  <div className={s.item} key={index}>
+                    <ShowWeatherDataInfo data={item} />
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
+          <div>
+            <p className={s.paragData}>Данные на завтрашний день:</p>
+            <div className={s.content}>
+              <div className={s.item}>
+                <ShowWeatherDataInfo data={dataWeather.tomorrow} />
+              </div>
             </div>
           </div>
-          <Link href={'/'}>
-            <button>Вернуться назад</button>
-          </Link>
         </div>
       )}
     </>
