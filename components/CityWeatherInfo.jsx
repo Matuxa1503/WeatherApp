@@ -1,5 +1,5 @@
 import s from '../styles/CityWeatherInfo.module.scss';
-import { convertUnix } from '../utils/getStringTimeFromUnix';
+import { convertToLocalTime } from '../utils/getStringTimeFromUnix';
 
 const CityWeatherInfo = ({ cityInfo }) => {
   return (
@@ -8,8 +8,9 @@ const CityWeatherInfo = ({ cityInfo }) => {
         {cityInfo.name} ({cityInfo.country})
       </h1>
       <div className={s.wrapperSubtitle}>
-        <h2 className={s.subtitle}>Время восхода Солнца: {convertUnix(cityInfo.sunrise)}</h2>
-        <h2 className={s.subtitle}>Время захода Солнца: {convertUnix(cityInfo.sunset)}</h2>
+        {/* Время указано не местное! Указано по поясу Минска*/}
+        <h2 className={s.subtitle}>Время восхода Солнца: {convertToLocalTime(cityInfo.sunrise)}</h2>
+        <h2 className={s.subtitle}>Время захода Солнца: {convertToLocalTime(cityInfo.sunset)}</h2>
       </div>
     </div>
   );
