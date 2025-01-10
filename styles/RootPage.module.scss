@@ -1,0 +1,35 @@
+.wrapper {
+  @apply container 2xl:px-3 mx-auto w-full;
+
+  .geolocationBlock {
+    @apply flex items-center;
+
+    .geolocationText {
+      @apply text-b mr-1;
+    }
+  }
+
+  .weatherInfo {
+    @apply flex flex-col justify-center items-center h-screen text-center;
+
+    .searchBlock {
+      @apply mt-10;
+
+      .input {
+        @apply border-2 border-red-500 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-b;
+      }
+    }
+  }
+
+  .btn {
+    @apply p-2 border rounded-md text-mainColor hover:bg-c transition-colors ease-in-out duration-300;
+  }
+
+  .svg {
+    @apply h-5 w-5 text-c;
+  }
+
+  .error {
+    @apply text-red-500;
+  }
+}

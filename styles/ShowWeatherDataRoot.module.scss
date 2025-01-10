@@ -1,0 +1,27 @@
+.title {
+  @apply text-7xl tracking-wider text-c mb-5;
+}
+
+.subtitle {
+  @apply text-5xl text-b first-letter:uppercase mb-3;
+}
+
+.temp {
+  @apply mb-7;
+
+  .tempCurrent {
+    @apply text-4xl text-a;
+  }
+
+  .tempFeelsLike {
+    @apply text-2xl text-d;
+  }
+}
+
+.infoWeather {
+  @apply text-2xl text-b mb-3;
+}
+
+.svg {
+  @apply h-5 w-5 text-d;
+}

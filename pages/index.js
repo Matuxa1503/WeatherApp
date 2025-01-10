@@ -1,9 +1,7 @@
-const MyComponent = () => {
-  return (
-    <div>
-      <h1>Main page</h1>
-    </div>
-  );
+import RootPage from './RootPage';
+
+const App = () => {
+  return <RootPage />;
 };
 
-export default MyComponent;
+export default App;
