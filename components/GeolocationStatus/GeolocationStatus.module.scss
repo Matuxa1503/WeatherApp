@@ -1,0 +1,7 @@
+.geolocationBlock {
+  @apply flex items-center mt-2 ml-2 text-xs;
+
+  .geolocationText {
+    @apply text-c mr-1;
+  }
+}
