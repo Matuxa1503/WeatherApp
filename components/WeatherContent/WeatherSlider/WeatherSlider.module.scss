@@ -1,0 +1,15 @@
+.wrapper {
+  @apply mt-4;
+
+  .parag {
+    @apply text-xl text-d;
+  }
+
+  .wrapperContent {
+    @apply relative w-full h-[75px] overflow-x-auto snap-x snap-mandatory scrollbar-hide;
+
+    .content {
+      @apply absolute w-full flex justify-around gap-x-4;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.container {
+  @apply snap-start flex flex-col items-center w-[41px];
+
+  .title {
+    @apply text-c;
+  }
+
+  .icon {
+    @apply text-d;
+  }
+}

@@ -3,14 +3,11 @@ module.exports = {
   content: ['./app/**/*.{js,ts,jsx,tsx,mdx}', './pages/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
-      fontFamily: {
-        montserrat: ['Montserrat', 'sans-serif'],
-      },
       colors: {
         customCaret: 'red',
-        mainColor: '#232c33ff',
-        a: '#5a7d7cff',
-        b: '#a0c1d1ff',
+        gradientColorFrom: '#4a28d3',
+        gradientColorTo: '#292f77',
+        mainColor: '#e3d8ff',
         c: '#b5b2c2ff',
         d: '#dadff7ff',
       },
@@ -23,5 +20,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')],
 };

@@ -1,0 +1,31 @@
+.container {
+  .subtitle {
+    @apply text-xl text-d;
+  }
+
+  .infoWeather {
+    @apply flex justify-center items-center gap-x-5 mb-4;
+
+    .title {
+      @apply text-8xl text-d leading-tight;
+    }
+
+    .moreInfo {
+      @apply flex flex-col w-[150px] justify-start text-d;
+    }
+  }
+
+  .additionalInfo {
+    @apply flex flex-col items-center text-gray-400;
+  }
+}
+
+@media (max-width: 370px) {
+  .container {
+    .infoWeather {
+      .title {
+        @apply text-[5rem];
+      }
+    }
+  }
+}

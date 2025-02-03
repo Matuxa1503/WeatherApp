@@ -1,0 +1,61 @@
+.container {
+  @apply w-full;
+
+  .temp {
+    @apply flex flex-col justify-center items-center;
+
+    .icon {
+      @apply w-32 h-32 text-d;
+    }
+
+    .tempCurrent {
+      @apply text-7xl text-d my-5;
+    }
+
+    .weatherType {
+      @apply text-3xl text-d first-letter:uppercase;
+    }
+
+    .tempFeelsLike {
+      @apply text-2xl text-c;
+    }
+  }
+
+  .infoWeather {
+    @apply flex justify-around text-2xl text-d my-5 w-full;
+  }
+
+  .title {
+    @apply text-[3rem] tracking-wider text-d;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    .title {
+      @apply tracking-normal;
+    }
+  }
+}
+
+@media (max-width: 430px) {
+  .container {
+    .temp {
+      .icon {
+        @apply w-20 h-20;
+      }
+
+      .tempCurrent {
+        @apply text-5xl my-2;
+      }
+    }
+
+    .infoWeather {
+      @apply flex-col items-center my-1;
+    }
+
+    .title {
+      @apply text-[2rem];
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.sunInfo {
+  @apply flex flex-col items-center;
+
+  .icon {
+    @apply w-16 h-16;
+  }
+
+  .sunrise {
+    @apply text-orange-400;
+  }
+
+  .sunset {
+    @apply text-rose-400;
+  }
+
+  .title {
+    @apply text-[16px] text-c tracking-[0.25em];
+  }
+
+  .subtitle {
+    @apply text-xl text-d tracking-wide first-letter:uppercase;
+  }
+}
