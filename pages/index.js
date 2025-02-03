@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import CitySearch from '../components/CitySearch/CitySeacrh';
-import GeolocationStatus from '../components/geolocationStatus/GeolocationStatus';
+import GeolocationStatus from '../components/GeolocationStatus/GeolocationStatus';
 import WeatherInfo from '../components/WeatherInfo/WeatherInfo';
 import useData from '../hooks/useData';
 import getLocation from '../utils/location';
